@@ -1,3 +1,14 @@
+class Article < ApplicationRecord
+  has_many :comments, dependent: :destroy  #, optional: true 
+  validates :title, presence: true
+
+end
+
+
+
+
+
+
 # class Article < ApplicationRecord
 #   #include Visible
 
@@ -87,6 +98,7 @@ end
 # end
 # Article.first.update()
 
+=begin
 class Article < ApplicationRecord
   has_many :comments , dependent: :destroy
   validates :title, presence: true
@@ -143,7 +155,7 @@ class Article < ApplicationRecord
       puts "k"
     end
 end
-
+=end
     # before_validation :a
     # after_validation :b
     # before_save :c

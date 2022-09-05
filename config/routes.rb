@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  get 'commentts/index'
-  root "articles#index"
+  #get 'book/index'
+  #get 'commentts/index'
+  # root "articles#index"
+  root "book#index"
   
-  resources :commentts
+  resources :book
+  #resources :commentts
   resources :articles do
     resources :comments
   end 

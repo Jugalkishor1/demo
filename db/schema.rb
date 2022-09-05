@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_29_102345) do
+ActiveRecord::Schema.define(version: 2022_09_02_073415) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "physician_id"
@@ -45,6 +45,22 @@ ActiveRecord::Schema.define(version: 2022_08_29_102345) do
     t.index ["part_id"], name: "index_assemblies_parts_on_part_id"
   end
 
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.integer "author_id"
+    t.datetime "published_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.text "price"
+    t.index ["author_id"], name: "index_books_on_author_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "commenter"
     t.text "body"
@@ -54,19 +70,49 @@ ActiveRecord::Schema.define(version: 2022_08_29_102345) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
-  create_table "commentts", force: :cascade do |t|
-    t.string "content"
-    t.integer "commented_on_id"
-    t.string "commented_on_type"
-    t.integer "User_id", null: false
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.integer "order_count"
+    t.integer "lock_version"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["User_id"], name: "index_commentts_on_User_id"
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "editors", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "status"
+    t.integer "total"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
+  create_table "papers", force: :cascade do |t|
+    t.string "title"
+    t.decimal "price"
+    t.boolean "out_of_print"
+    t.integer "supplier_id"
+    t.integer "editor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["editor_id"], name: "index_papers_on_editor_id"
+    t.index ["supplier_id"], name: "index_papers_on_supplier_id"
+  end
+
+  create_table "papers_orders", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "paper_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_papers_orders_on_order_id"
+    t.index ["paper_id"], name: "index_papers_orders_on_paper_id"
   end
 
   create_table "parts", force: :cascade do |t|
@@ -75,24 +121,25 @@ ActiveRecord::Schema.define(version: 2022_08_29_102345) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "patients", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
+    t.string "title"
+    t.string "body"
+    t.integer "customer_id"
+    t.integer "paper_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_reviews_on_customer_id"
+    t.index ["paper_id"], name: "index_reviews_on_paper_id"
+  end
+
+  create_table "supplier", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "physicians", force: :cascade do |t|
+  create_table "suppliers", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "reels", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -101,16 +148,8 @@ ActiveRecord::Schema.define(version: 2022_08_29_102345) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "vehicles", force: :cascade do |t|
-    t.string "type"
-    t.string "color"
-    t.decimal "price", precision: 10, scale: 2
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "lock_version"
   end
 
   add_foreign_key "comments", "articles"
-  add_foreign_key "commentts", "Users"
 end
