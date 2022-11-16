@@ -1,3 +1,19 @@
 bigint :- When creating a migration using Ruby on Rails and MySQL, the default MySQL type created when defining an integer field is an 11-digit signed int . This will allow you to store signed integers up to 2147483647. However MySQL has the BIGINT storage type which stores signed integers up to 9223372036854775807
 
 add_index :- allows for faster lookup by only grabbing all of the names in the name column in our database, then comparing it to our search query of the name we are looking for.
+
+
+<%= form_with model: @paper do |form| %>
+  <%- if @paper.persisted? %>
+  <%= form.text_field :title, value: SecureRandom.alphanumeric(5) %>
+  <%- else %>
+  <h5> Title:- <%= form.text_field :title %> </h5>
+  <% end %>
+
+  <%= form.number_field :price %>
+  <%= form.check_box :out_of_print %>
+  <%= form.collection_select :supplier_id, Supplier.order(:name), :id, :name %>
+  <%= form.collection_select :editor_id, Editor.order(:name), :id, :name %>
+  <%= form.text_field :title %> <!-- , value: "Edit here" -->
+  <%= form.submit %>
+<% end %>

@@ -1,0 +1,15 @@
+<h3> Fill this form</h3>
+
+
+<%= link_to "New Article", new_paper_path %>
+
+<!-- <h3>@paper.title </h3> -->
+
+<h4>List of all papers</h4>
+<ul>
+  <% @papers.each do |paper| %>
+    <li>
+      <%= link_to paper.title, paper %>
+    </li>
+  <% end %>
+</ul>

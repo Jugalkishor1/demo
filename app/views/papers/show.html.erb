@@ -1,0 +1,16 @@
+
+<h3>Welcome :- </h3>
+
+<h3> Title :- <%= @paper.title %> </h3>
+
+<h3> Price :- <%= @paper.price %> </h3>
+
+<h3> Out of print :- <%= @paper.out_of_print %> </h1>
+
+<h4> Supplier :- <%= @paper.supplier.name %> </h1>
+<h4> Editor of this news paper :- <%= @paper.editor.name %> </h1>
+
+	<h4> Edit this <%= link_to "Edit", edit_paper_path(@paper) %></h4>   
+<h4> <%= button_to 'Delete',  paper_path(@paper),  method: :delete %> </h4>
+
+<%= link_to "Go to home page", root_path %>

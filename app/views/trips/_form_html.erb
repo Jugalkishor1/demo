@@ -1,0 +1,13 @@
+<%= form_with(model: trip) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+<div class="field">
+    <%= form.label :content %>
+    <%= form.rich_text_area :content %>
+  </div>
+  <div class="field">
+    <button type="submit" class="btn btn-success">Save</button>
+  </div>
+<% end %>

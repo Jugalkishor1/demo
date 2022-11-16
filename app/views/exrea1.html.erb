@@ -1,0 +1,51 @@
+patch vs put
+
+# Rails.application.routes.draw do
+#    root "articles#index"
+  
+  # resources :papers, :books
+#   # resolve("Paper") { route_for(:paper) }
+  
+#   # resources :articles do
+#   #   resources :comments
+#   # end
+
+#   # resources :articles do
+#   #   resources :comments, shallow: true
+#   # end
+
+#   resources :articles, concerns: :commentable
+
+#   # resources :articles do
+#   #   resources :comments, shallow: true
+#   # end
+
+
+#   # namespace :admin do
+#   #   resources :articles
+#   # end
+
+#   # scope module: 'admin', path: 'jugal' do      #add custom url by scope / not required any module
+#   #   resources :articles, :comments
+#   # end
+
+# end
+
+naming of routes
+
+#--we can specify name for any routes with as: option
+  get '/papers/:id', to: 'papers#show', as: 'paper' #paper_path return paper
+
+
+3.5 Defining Defaults
+get 'jugal/:id', to: 'jugal#show', defaults: { format: 'jpg' }
+result : --  oem@tout:~/demo1$ rails routes | grep jugal
+                                         GET    /jugal/:id(.:format)                                                                              jugal#show {:format=>"jpg"}
+
+
+segment constraints:
+get 'books/:id', to: 'books#show', constraints: { id: /[A-Z]\d{5}/ }
+
+
+
+resolve :- This will generate the singular URL /basket instead of the usual /baskets/:id.

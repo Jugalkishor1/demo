@@ -6,7 +6,9 @@ class BookController < ApplicationController
   def show
     @book = Book.find_by(id: params[:id])
     if @book.nil?
-      render action: "index"
+      # render action: "index", layout: false
+      render layout: false
+
     end
   end
 

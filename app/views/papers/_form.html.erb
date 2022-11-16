@@ -1,0 +1,9 @@
+<%= form_with model: @paper do |form| %>
+  <h5> Title:- <%= form.text_field :title %> </h5>
+
+  <%= form.number_field :price %>
+  <%= form.check_box :out_of_print %>
+  <%= form.collection_select :supplier_id, Supplier.order(:name), :id, :name %>
+  <%= form.collection_select :editor_id, Editor.order(:name), :id, :name %>
+  <%= form.submit %>
+<% end %>

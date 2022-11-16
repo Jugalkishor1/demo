@@ -1,19 +1,20 @@
 <%= form_with model: article do |form| %>
   <div>
     <%= form.label :email %>
+
+    <%= form.text_field :email, placeholder: "Enter your email here" %>
     
-    <%= form.text_field :email %>
   </div>
 
   <div>
     <%= form.label :password %>
     
-    <%= form.text_field :password %>
+    <%= form.text_field :password, placeholder: "Enter your Password here" %>
   </div>
 
   <div>
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, placeholder: "Enter title here" %>
     <% article.errors.full_messages_for(:title).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -21,7 +22,7 @@
 
   <div>
     <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
+    <%= form.text_area :body, placeholder: "Enter Body here" %><br>
     <% article.errors.full_messages_for(:body).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -29,7 +30,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-<!-- rails generate migration add_checkbox_to_articles agree:boolean -->
-<!-- rails generate migration add_column_to_articles email:text -->
-<!-- git branch view_practice -- creating a new branch -->

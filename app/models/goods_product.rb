@@ -1,2 +1,0 @@
-class GoodsProduct < ApplicationRecord
-end
